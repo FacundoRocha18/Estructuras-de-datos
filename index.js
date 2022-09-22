@@ -11,26 +11,28 @@ const busquedaLineal = (orderedArray, value) => {
   return null;
 }
 
-const busquedaBinaria = (orderedArray, value) => {
-  lim_inf = 0;
-  lim_sup = orderedArray.length - 1;
+const busquedaBinaria = (array, value) => {
+  let lim_inf = 0;
+  let lim_sup = array.length - 1;
 
   while (lim_inf <= lim_sup) {
-    punto_medio = (lim_inf + lim_sup) / 2;
-    valor_medio = orderedArray[punto_medio];
+    const punto_medio = parseInt((lim_inf + lim_sup) / 2);
+    const valor_medio = array[punto_medio];
 
-    if (valor < valor_medio) {
+    if (value < valor_medio) {
       lim_sup = punto_medio - 1;
-    } else if (valor > valor_medio) {
+    } else if (value > valor_medio) {
       lim_inf = punto_medio + 1;
-    } else if (valor == valor_medio) {
+    } else if (value == valor_medio) {
       return punto_medio;
     }
   }
 }
 
-const bubbleSort = () => {
-  const array = [50, 40, 30, 20, 10];
+//console.log(busquedaBinaria(orderedArray, 4));
+
+const bubbleSort = (array) => {
+  //const array = [50, 40, 30, 20, 10];
   let comparaciones = 0;
   let intercambios = 0;
   let desordenados = array.length - 1;
@@ -51,11 +53,12 @@ const bubbleSort = () => {
     }
     desordenados--;
   }
-  console.log('Comparaciones realizadas: ' + comparaciones);
-  console.log('Intercambios realizados: ' + intercambios);
+  //console.log('Comparaciones realizadas: ' + comparaciones);
+  //console.log('Intercambios realizados: ' + intercambios);
+  return array;
 }
 
-const array_con_duplicados = [1, 2, 3, 4, 4, 5, 5, 10, 11, 21, 45, 45];
+const array_con_duplicados = [1, 2, 4, 4, 5, 3, 5, 10, 11, 21, 10, 45];
 const array_sin_duplicados = [1, 2, 3, 4, 5, 10];
 
 const duplicates = (array) => {
@@ -86,15 +89,34 @@ const duplicates2 = (array) => {
     comparaciones++;
     if (i !== i - 1 && array[i] === array[i - 1]) {
       duplicados++;
-      console.log("Comparaciones: " + comparaciones);
       console.log("Duplicados: " + duplicados);
     }
-    console.log("Comparaciones: " + comparaciones);
-    console.log("Duplicados: " + duplicados);
   }
+  console.log("Comparaciones: " + comparaciones);
+  console.log("Duplicados: " + duplicados);
 };
 
-duplicates2(array_con_duplicados);
+//duplicates2(array_sin_duplicados);
+
+const duplicates3 = (array) => {
+  let comparaciones = 0;
+  let duplicados = 0;
+
+  const orderedArray = bubbleSort(array);
+  let start = 0;
+  let end = orderedArray.length - 1;
+  while (start <= end) {
+    comparaciones++;
+    if (start !== start - 1 && orderedArray[start] === orderedArray[start - 1]) {
+      duplicados++;
+    }
+    start ++;
+  }
+  console.log("Comparaciones: " + comparaciones);
+  console.log("Duplicados: " + duplicados);
+};
+
+duplicates3(array_con_duplicados);
 
 const array = [3, 5, 2, 9, 6];
 
@@ -122,5 +144,7 @@ const SelectionSort = (array) => {
 // Complejidad con LinearSearch: 9
 // Complejidad con BinarySearch: 4
 // Complejidad con BubbleSort: 20
+// Complejidad con Duplicates: N
+
 
 
