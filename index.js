@@ -73,7 +73,7 @@ const duplicados_original = (array) => {
         duplicados++;
         valores_duplicados.push(array[i]);
       }
-      console.log('Indice i: ' + i, 'Indice j: ' + j)
+      //console.log('Indice i: ' + i, 'Indice j: ' + j)
     }
   }
   console.log("Comparaciones: " + comparaciones);
@@ -88,24 +88,21 @@ const duplicados_modificado = (array) => {
 
   let comparaciones = 0;
   let duplicados = 0;
-  const arreglo_ordenado = bubbleSort(array);
-  let valores_duplicados = [];
-
-  for (let i = 0; i < arreglo_ordenado.length; i++) {
-    let j = i - 1;
+  const valores_duplicados = [];
+  let j = 0;
+  
+  for (let i = 0; i < array.length; i++) {
     comparaciones++;
-    if (i !== j && arreglo_ordenado[i] === arreglo_ordenado[j]) {
-      j++;
+    j++;
+    if (i !== j && array[i] === array[j]) {
       duplicados++;
       valores_duplicados.push(array[i]);
-
     }
-    console.log('Indice i: ' + i, 'Indice j: ' + j);
+    //console.log('Indice i: ' + i, 'Indice j: ' + j);
   }
   console.log("Comparaciones: " + comparaciones);
   console.log("Duplicados: " + duplicados);
   console.log("Valores duplicados: " + valores_duplicados);
-
   return false;
 };
 
