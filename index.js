@@ -1,35 +1,5 @@
-const orderedArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const busquedaLineal = (orderedArray, value) => {
-  orderedArray.forEach(element => {
-    if (element === value) {
-      return value;
-    } else if (element > value) {
-      return;
-    }
-  });
-  return null;
-}
-
-const busquedaBinaria = (array, value) => {
-  let lim_inf = 0;
-  let lim_sup = array.length - 1;
-
-  while (lim_inf <= lim_sup) {
-    const punto_medio = parseInt((lim_inf + lim_sup) / 2);
-    const valor_medio = array[punto_medio];
-
-    if (value < valor_medio) {
-      lim_sup = punto_medio - 1;
-    } else if (value > valor_medio) {
-      lim_inf = punto_medio + 1;
-    } else if (value == valor_medio) {
-      return punto_medio;
-    }
-  }
-}
-
-//console.log(busquedaBinaria(orderedArray, 4));
+const array_con_duplicados = [1, 2, 3, 4, 4, 5, 5, 10, 11, 10, 15, 12, 15, 45, 32, 12];
+const array_sin_duplicados = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const bubbleSort = (array) => {
   let comparaciones = 0;
@@ -42,7 +12,7 @@ const bubbleSort = (array) => {
     ordenado = true;
     for (let i = 0; i < desordenados; i++) {
       comparaciones++;
-      if (array[i] < array[i + 1]) {
+      if (array[i] > array[i + 1]) {
         intercambios++;
         ordenado = false;
         temp = array[i];
@@ -57,13 +27,11 @@ const bubbleSort = (array) => {
   return array;
 }
 
-const array_con_duplicados = [1, 2, 3, 4, 4, 5, 5, 10, 11, 10];
-const array_sin_duplicados = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
 const duplicados_original = (array) => {
   let comparaciones = 0;
   let duplicados = 0;
-  let valores_duplicados = [];
+  const valores_duplicados = [];
+  bubbleSort(array)
 
 
   for (let i = 0; i < array.length; i++) {
@@ -73,66 +41,42 @@ const duplicados_original = (array) => {
         duplicados++;
         valores_duplicados.push(array[i]);
       }
-      //console.log('Indice i: ' + i, 'Indice j: ' + j)
     }
   }
   console.log("Comparaciones: " + comparaciones);
   console.log("Duplicados: " + duplicados);
   console.log("Valores duplicados: " + valores_duplicados);
+
   return false;
 };
 
-duplicados_original(array_con_duplicados)
+console.log(duplicados_original(array_con_duplicados));
 
 const duplicados_modificado = (array) => {
 
   let comparaciones = 0;
   let duplicados = 0;
   const valores_duplicados = [];
-  let j = 0;
-  
+  bubbleSort(array)
+
   for (let i = 0; i < array.length; i++) {
+    const j = i + 1;
     comparaciones++;
-    j++;
     if (i !== j && array[i] === array[j]) {
       duplicados++;
-      valores_duplicados.push(array[i]);
+      valores_duplicados.push(array[i], array[j]);
     }
-    //console.log('Indice i: ' + i, 'Indice j: ' + j);
   }
+
   console.log("Comparaciones: " + comparaciones);
-  console.log("Duplicados: " + duplicados);
+  console.log("Cantidad de duplicados: " + duplicados);
   console.log("Valores duplicados: " + valores_duplicados);
   return false;
 };
 
-duplicados_modificado(array_con_duplicados);
-
-const array = [3, 5, 2, 9, 6];
-
-const SelectionSort = (array) => {
-  for (let i = 0; i < array.lenght; i++) {
-    let indiceMenor = i;
-    for (let j = i + 1; j < array.lenght; j++) {
-      if (array[j] < array[indiceMenor]) {
-        indiceMenor = j;
-      }
-    }
-    if (indiceMenor !== i) {
-      let temp = array[i];
-      array[i] = array[indiceMenor];
-      array[indiceMenor] = temp;
-    }
-  }
-  return array;
-};
-
-//console.log(SelectionSort(array));
+console.log(duplicados_modificado(array_con_duplicados));
 
 // Complejidad y eficiencia (pasos a seguir) para Array de 9 elementos:
-// Complejidad con LinearSearch: 9
-// Complejidad con BinarySearch: 4
-// Complejidad con BubbleSort: 20
 // Complejidad con duplicados_original: N^2
 // Complejidad con duplicados_modificado: N
 
