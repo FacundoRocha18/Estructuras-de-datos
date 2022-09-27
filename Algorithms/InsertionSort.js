@@ -1,8 +1,16 @@
 const array1 = [3, 6, 2, 1, 4, 2, 6, 1, 3, 4];
-const array2 = [3, 6, 2, 1, 4, 2, 6, 1, 3, 4];
 
+const generador_arreglo = (largo) => {
+  let arreglo = [];
 
-const InsertionSort_original = (arreglo) => {
+  for (let i = 0; i < largo; i++) {
+      arreglo.push(Math.floor(Math.random() * 100));
+  }
+  console.log('Arreglo sin ordenar: ' + arreglo)
+  return arreglo;
+}
+
+const InsertionSort = (arreglo) => {
 
   const size = arreglo.length;
   let comparaciones = 0;
@@ -25,9 +33,13 @@ const InsertionSort_original = (arreglo) => {
     arreglo[j + 1] = key;
     intercambios++;
   }
+  console.log('/----------------------/')
+  console.log('Arreglo ordenado con InsertionSort: ' + arreglo)
+  console.log('/----------------------/')
   console.log('Comparaciones realizadas: ' + comparaciones);
   console.log('Intercambios realizados: ' + intercambios);
+  console.log('Total: ' + parseInt(comparaciones + intercambios));
+  console.log('/----------------------/')
 }
-console.log(array1)
-InsertionSort_original(array1)
-console.log(array1)
+
+InsertionSort(generador_arreglo(80))

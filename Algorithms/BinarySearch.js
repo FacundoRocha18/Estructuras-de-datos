@@ -1,27 +1,25 @@
 const arreglo_ordenado = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const busquedaBinaria = (arreglo_ordenado, valor) => {
-    let limite_inferior = 0;
-    let limite_superior = arreglo_ordenado.length - 1;
-    let comparaciones = 0;
-    let coincidencias = 0;
+const busquedaBinaria = (a, item, low, high) => {
+    
+    if (high <= low)
+        return (item > a[low]) ?
+            (low + 1) : low;
 
-    while (limite_inferior <= limite_superior) {
-        comparaciones++;
-        const punto_medio = parseInt((limite_inferior + limite_superior) / 2);
-        const valor_medio = arreglo_ordenado[punto_medio];
+    mid = Math.floor((low + high) / 2);
 
-        if (valor < valor_medio) {
-            limite_superior = punto_medio - 1;
-        } else if (valor > valor_medio) {
-            limite_inferior = punto_medio + 1;
-        } else if (valor == valor_medio) {
-            return punto_medio;
-        }
-    }
+    if (item == a[mid])
+        return mid + 1;
+
+    if (item > a[mid])
+        return busquedaBinaria(a, item,
+            mid + 1, high);
+
+    return busquedaBinaria(a, item, low,
+        mid - 1);
 }
 
-console.log(busquedaBinaria(arreglo_ordenado, 4));
+console.log(busquedaBinaria(arreglo_ordenado, 4, 0, 9));
 
 // Complejidad y eficiencia (pasos a seguir) para Array de 9 elementos:
 // Complejidad con BinarySearch: 4
